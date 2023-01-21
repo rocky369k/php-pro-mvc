@@ -1,6 +1,5 @@
 <?php
 \Core\View::render('blocks/header', ['pageTitle' => 'Registration']);
-$errors = $errors ?? [];
 ?>
     <div class="container">
         <div class="row">
@@ -13,9 +12,8 @@ $errors = $errors ?? [];
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $fields['name'] ?? '' ?>" placeholder="Your name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your name">
                         </div>
-                        <?= showInputError('name', $errors); ?>
                         <div class="mb-3">
                             <label for="surname" class="form-label">Surname</label>
                             <input type="text" class="form-control" id="surname" name="surname" placeholder="Your surname">

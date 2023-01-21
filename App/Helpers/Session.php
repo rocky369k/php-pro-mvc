@@ -14,11 +14,11 @@ class Session
         return $_SESSION['user_data']['id'] ?? null;
     }
 
-    public static function setUserData($id, $options = [])
+    public static function setUserData($id, ...$args)
     {
         $options = array_merge(
             ['id' => $id],
-            $options
+            $args
         );
 
         $_SESSION['user_data'] = array_merge(

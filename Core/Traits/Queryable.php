@@ -69,17 +69,6 @@ trait Queryable
         return $query->fetchObject(static::class);
     }
 
-    public static function find(int $id)
-    {
-        $query = "SELECT * FROM " . static::$tableName . " WHERE id=:id";
-
-        $query = Db::connect()->prepare($query);
-        $query->bindParam('id', $id);
-        $query->execute();
-
-        return $query->fetchObject(static::class);
-    }
-
     protected static function resetQuery()
     {
         static::$query = "";
@@ -102,36 +91,6 @@ trait Queryable
         $obj->commands[] = 'where';
 
         return $obj;
-    }
-
-    public function update(array $data)
-    {
-        $query = "UPDATE " . static::$tableName . " SET " . $this->prepareUpdateParams(array_keys($data)) . " WHERE id=:id";
-        $query = Db::connect()->prepare($query);
-        $data['id'] = $this->id; // $park->id
-
-        return $query->execute($data);
-    }
-
-    public function destroy(): bool
-    {
-        $query = "DELETE FROM " . static::$tableName . " WHERE id=:id";
-        $query = Db::connect()->prepare($query);
-        $query->bindParam('id', $this->id);
-
-        return $query->execute();
-    }
-
-    protected function prepareUpdateParams(array $keys): string
-    {
-        $string = "";
-        $lastKey = array_key_last($keys);
-
-        foreach ($keys as $index => $key) {
-            $string .= "{$key}=:{$key}" . ($lastKey !== $index ? ', ' : '');
-        }
-
-        return $string;
     }
 
     protected function can(array $allowedMethods)
