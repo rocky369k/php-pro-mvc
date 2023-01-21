@@ -1,5 +1,4 @@
 <?php
-
 namespace Config;
 
 class Config
@@ -49,4 +48,5 @@ class Config
 
         return $value;
     }
+
 }
